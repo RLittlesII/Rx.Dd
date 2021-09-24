@@ -1,8 +1,7 @@
-﻿using System;
-using Splat;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+[assembly:XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Rx.Dd
 {
     public partial class App : Application

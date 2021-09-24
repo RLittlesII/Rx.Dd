@@ -1,5 +1,6 @@
 using System;
 using ReactiveUI;
+using Rx.Dd.Filter;
 using Sextant;
 using Sextant.XamForms;
 using Splat;
@@ -29,12 +30,10 @@ namespace Rx.Dd
         private void RegisterViews(IDependencyResolver dependencyResolver)
         {
             dependencyResolver.RegisterView<MainPage, MainViewModel>();
+            dependencyResolver.RegisterView<Filters, FiltersViewModel>();
         }
 
-        private void RegisterViewModels(IDependencyResolver dependencyResolver)
-        {
-            dependencyResolver.RegisterViewModel<MainViewModel>();
-        }
+        private void RegisterViewModels(IDependencyResolver dependencyResolver) => dependencyResolver.RegisterViewModel<MainViewModel>();
 
         private void RegisterServices(IDependencyResolver dependencyResolver)
         {
