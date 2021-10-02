@@ -8,9 +8,10 @@
                               x:TypeArguments="filter:FiltersViewModel">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Hello, world!"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+            <Picker x:Name="Alignment" />
+            <ListView x:Name="HeroList">
+                
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </xamForms:ReactiveContentPage>

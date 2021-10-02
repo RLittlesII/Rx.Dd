@@ -33,7 +33,9 @@ namespace Rx.Dd
             dependencyResolver.RegisterView<Filters, FiltersViewModel>();
         }
 
-        private void RegisterViewModels(IDependencyResolver dependencyResolver) => dependencyResolver.RegisterViewModel<MainViewModel>();
+        private void RegisterViewModels(IDependencyResolver dependencyResolver) => dependencyResolver
+           .RegisterViewModel(new MainViewModel(dependencyResolver.GetService<IParameterViewStackService>()))
+           .RegisterViewModel(new FiltersViewModel(dependencyResolver.GetService<IHeroService>()));
 
         private void RegisterServices(IDependencyResolver dependencyResolver)
         {
@@ -41,6 +43,8 @@ namespace Rx.Dd
             dependencyResolver.RegisterNavigationView(() => navigationView);
             dependencyResolver.RegisterLazySingleton<IParameterViewStackService>(() => new ParameterViewStackService(navigationView));
             dependencyResolver.RegisterLazySingleton<IViewModelFactory>(() => new DefaultViewModelFactory());
+
+            dependencyResolver.Register<IHeroService>(() => new HeroService());
             dependencyResolver.InitializeReactiveUI();
         }
 
