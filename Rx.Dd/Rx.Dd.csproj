@@ -11,6 +11,7 @@
     <PackageReference Include="Pharmacist.MsBuild" Version="2.*" PrivateAssets="all" />
     <PackageReference Include="ReactiveUI.Fody" Version="13.2.*" />
     <PackageReference Include="ReactiveUI.XamForms" Version="13.2.*" />
+    <PackageReference Include="Refit" Version="6.0.94" />
     <PackageReference Include="Rocket.Surgery.Airframe.ViewModels" Version="0.8.1" />
     <PackageReference Include="Sextant.XamForms" Version="2.11.*" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.*" />

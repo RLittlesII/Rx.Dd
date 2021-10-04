@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 namespace Rx.Dd
 {
@@ -8,6 +9,12 @@ namespace Rx.Dd
 
         public void OnError(Exception error) { }
 
-        public void OnNext(Exception value) { }
+        public void OnNext(Exception value)
+        {
+            if (Debugger.IsAttached)
+            {
+                Debugger.Break();
+            }
+        }
     }
 }

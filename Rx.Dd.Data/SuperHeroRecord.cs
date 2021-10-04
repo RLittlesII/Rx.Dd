@@ -8,7 +8,7 @@ namespace Rx.Dd.Data
         public string Response { get; set; }
 
         [JsonPropertyName("id")]
-        public long Id { get; set; }
+        public string Id { get; set; }
 
         [JsonPropertyName("name")]
         public string Name { get; set; }

@@ -1,9 +1,11 @@
 using System;
 using ReactiveUI;
+using Refit;
 using Rx.Dd.Filter;
 using Sextant;
 using Sextant.XamForms;
 using Splat;
+using System.Net.Http;
 using Xamarin.Forms;
 
 namespace Rx.Dd
@@ -31,11 +33,13 @@ namespace Rx.Dd
         {
             dependencyResolver.RegisterView<MainPage, MainViewModel>();
             dependencyResolver.RegisterView<Filters, FiltersViewModel>();
+            dependencyResolver.RegisterView<Search, SearchViewModel>();
         }
 
         private void RegisterViewModels(IDependencyResolver dependencyResolver) => dependencyResolver
            .RegisterViewModel(new MainViewModel(dependencyResolver.GetService<IParameterViewStackService>()))
-           .RegisterViewModel(new FiltersViewModel(dependencyResolver.GetService<IHeroService>()));
+           .RegisterViewModel(new FiltersViewModel(dependencyResolver.GetService<IHeroService>()))
+           .RegisterViewModel(new SearchViewModel(dependencyResolver.GetService<ISuperheroApiContract>()));
 
         private void RegisterServices(IDependencyResolver dependencyResolver)
         {
@@ -44,6 +48,7 @@ namespace Rx.Dd
             dependencyResolver.RegisterLazySingleton<IParameterViewStackService>(() => new ParameterViewStackService(navigationView));
             dependencyResolver.RegisterLazySingleton<IViewModelFactory>(() => new DefaultViewModelFactory());
 
+            dependencyResolver.Register<ISuperheroApiContract>(() => RestService.For<ISuperheroApiContract>("https://www.superheroapi.com/api/{accesstoken}/", new RefitSettings()));
             dependencyResolver.Register<IHeroService>(() => new HeroService());
             dependencyResolver.InitializeReactiveUI();
         }

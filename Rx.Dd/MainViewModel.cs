@@ -23,6 +23,7 @@ namespace Rx.Dd
                     return item switch
                     {
                         MenuItem.Filter => await parameterViewStackService.PushPage<FiltersViewModel>(),
+                        MenuItem.Search => await parameterViewStackService.PushPage<SearchViewModel>(),
                         _               => throw new ArgumentOutOfRangeException(nameof(item), item, null)
                     };
                 }
@@ -36,6 +37,7 @@ namespace Rx.Dd
 
     public enum MenuItem
     {
-        Filter
+        Filter,
+        Search
     }
 }
