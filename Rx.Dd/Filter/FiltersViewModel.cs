@@ -14,18 +14,18 @@ namespace Rx.Dd.Filter
         private readonly ReadOnlyObservableCollection<string> _alignments;
         private readonly ReadOnlyObservableCollection<Hero> _heroes;
 
-        public FiltersViewModel(IHeroService heroService)
+        public FiltersViewModel()
         {
-            heroService
-               .Transform(x => x.Alignment)
-               .Bind(out _alignments)
-               .Subscribe()
-               .DisposeWith(Garbage);
-
-            heroService
-               .Bind(out _heroes)
-               .Subscribe()
-               .DisposeWith(Garbage);
+            // heroService
+            //    .Transform(x => x.Alignment)
+            //    .Bind(out _alignments)
+            //    .Subscribe()
+            //    .DisposeWith(Garbage);
+            //
+            // heroService
+            //    .Bind(out _heroes)
+            //    .Subscribe()
+            //    .DisposeWith(Garbage);
         }
 
         public ReadOnlyObservableCollection<string> Alignments => _alignments;

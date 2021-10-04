@@ -4,13 +4,18 @@
                               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                               xmlns:xamForms="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
                               xmlns:filter="clr-namespace:Rx.Dd.Filter;assembly=Rx.Dd"
+                              xmlns:dd="clr-namespace:Rx.Dd;assembly=Rx.Dd"
                               x:Class="Rx.Dd.Filter.Filters"
                               x:TypeArguments="filter:FiltersViewModel">
     <ContentPage.Content>
         <StackLayout>
             <Picker x:Name="Alignment" />
             <ListView x:Name="HeroList">
-                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <dd:HeroCard/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
     </ContentPage.Content>

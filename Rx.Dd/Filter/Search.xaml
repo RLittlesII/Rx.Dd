@@ -5,17 +5,16 @@
                               xmlns:xamForms="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
                               xmlns:filter="clr-namespace:Rx.Dd.Filter;assembly=Rx.Dd"
                               xmlns:data="clr-namespace:Rx.Dd.Data;assembly=Rx.Dd.Data"
+                              xmlns:dd="clr-namespace:Rx.Dd;assembly=Rx.Dd"
                               x:Class="Rx.Dd.Filter.Search"
                               x:TypeArguments="filter:SearchViewModel">
     <ContentPage.Content>
         <StackLayout>
             <SearchBar x:Name="SearchText" />
-            <ListView ItemsSource="{Binding Heroes}">
+            <ListView ItemsSource="{Binding Heroes}" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="data:SuperHeroRecord">
-                        <ViewCell>
-                            <Image Source="{Binding Image.Url}" />
-                        </ViewCell>
+                        <dd:HeroCard/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
