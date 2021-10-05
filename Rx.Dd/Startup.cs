@@ -50,6 +50,7 @@ namespace Rx.Dd
 
             dependencyResolver.Register<ISuperheroApiContract>(() => RestService.For<ISuperheroApiContract>("https://www.superheroapi.com/api/{accesstoken}/", new RefitSettings()));
             dependencyResolver.Register<IHeroApiClient>(() => new HeroApiClient(dependencyResolver.GetService<ISuperheroApiContract>()));
+            dependencyResolver.Register<IHeroCache>(() => new HeroCache(dependencyResolver.GetService<IHeroApiClient>()));
             dependencyResolver.InitializeReactiveUI();
         }
 
