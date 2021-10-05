@@ -15,13 +15,11 @@ namespace Rx.Dd.Filter
 {
     public class SearchViewModel : NavigableViewModelBase
     {
-        public SearchViewModel(ISuperheroApiContract superheroApiContract)
+        public SearchViewModel(IHeroApiClient heroApiClient)
         {
             this.WhenValueChanged(x => x.SearchText)
-               .ObserveOn(RxApp.TaskpoolScheduler)
-               .SelectMany(superheroApiContract.SearchHero)
-               .Where(x => x.Heroes != null && x.Heroes.Count > 0)
-               .Select(x => x.Heroes)
+               .Throttle(TimeSpan.FromMilliseconds(300), RxApp.TaskpoolScheduler)
+               .SelectMany(heroApiClient.Find)
                .Subscribe(heroes => _heroCache.EditDiff(heroes, (first, second) => first.Id == second.Id), RxApp.DefaultExceptionHandler.OnNext)
                .DisposeWith(Garbage);
 

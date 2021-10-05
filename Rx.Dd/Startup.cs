@@ -38,8 +38,8 @@ namespace Rx.Dd
 
         private void RegisterViewModels(IDependencyResolver dependencyResolver) => dependencyResolver
            .RegisterViewModel(new MainViewModel(dependencyResolver.GetService<IParameterViewStackService>()))
-           .RegisterViewModel(new FiltersViewModel(dependencyResolver.GetService<IHeroService>()))
-           .RegisterViewModel(new SearchViewModel(dependencyResolver.GetService<ISuperheroApiContract>()));
+           .RegisterViewModel(new FiltersViewModel(dependencyResolver.GetService<IHeroCache>()))
+           .RegisterViewModel(new SearchViewModel(dependencyResolver.GetService<IHeroApiClient>()));
 
         private void RegisterServices(IDependencyResolver dependencyResolver)
         {
@@ -49,7 +49,7 @@ namespace Rx.Dd
             dependencyResolver.RegisterLazySingleton<IViewModelFactory>(() => new DefaultViewModelFactory());
 
             dependencyResolver.Register<ISuperheroApiContract>(() => RestService.For<ISuperheroApiContract>("https://www.superheroapi.com/api/{accesstoken}/", new RefitSettings()));
-            dependencyResolver.Register<IHeroService>(() => new HeroService());
+            dependencyResolver.Register<IHeroApiClient>(() => new HeroApiClient(dependencyResolver.GetService<ISuperheroApiContract>()));
             dependencyResolver.InitializeReactiveUI();
         }
 

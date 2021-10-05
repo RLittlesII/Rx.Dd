@@ -1,18 +1,25 @@
 using Refit;
 using Rx.Dd.Data;
 using System;
-using System.Collections.Generic;
 
 namespace Rx.Dd
 {
     public interface ISuperheroApiContract
     {
-            /// <summary>
-            /// Gets an store with the specified ID.
-            /// </summary>
-            /// <param name="name">The ID of the appointment to retrieve.</param>
-            /// <returns>An observable which signals with the store.</returns>
-            [Get("/search/{name}")]
-            IObservable<SuperHeroRecords> SearchHero(string name);
+        /// <summary>
+        /// Gets an hero with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the appointment to retrieve.</param>
+        /// <returns>An observable which signals with the hero.</returns>
+        [Get("/{id}")]
+        IObservable<SuperHeroRecord> Get(string id);
+
+        /// <summary>
+        /// Searches heroes with the specified name.
+        /// </summary>
+        /// <param name="name">The ID of the appointment to retrieve.</param>
+        /// <returns>An observable which signals with the hero.</returns>
+        [Get("/search/{name}")]
+        IObservable<SuperHeroRecords> Search(string name);
     }
 }
