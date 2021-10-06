@@ -1,3 +1,4 @@
+using ReactiveUI;
 using Rx.Dd.Data;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,7 @@ namespace Rx.Dd
 {
     public class HeroApiClient : IHeroApiClient
     {
-        public HeroApiClient(ISuperheroApiContract superheroApiContract) =>
-            _superheroApiContract = superheroApiContract;
+        public HeroApiClient(ISuperheroApiContract superheroApiContract) => _superheroApiContract = superheroApiContract;
 
         /// <inheritdoc />
         public IObservable<SuperHeroRecord> GetHero(string id, bool forceUpdate = false) =>
@@ -21,20 +21,20 @@ namespace Rx.Dd
             {
                 var disposable = new CompositeDisposable();
                 var heroes = new List<SuperHeroRecord>();
-                for (var i = 0; i < 1337; i++)
-                {
-                    _superheroApiContract.Get(i.ToString()).Subscribe(hero => heroes.Add(hero)).DisposeWith(disposable);
-                }
 
-                observer.OnNext(heroes);
+                Observable.Range(0, 100)
+                   .Select(id => _superheroApiContract.Get(id.ToString()))
+                   .Merge(6)
+                   .Subscribe(hero => heroes.Add(hero), () => observer.OnNext(heroes))
+                   .DisposeWith(disposable);
 
                 return disposable;
             }
         );
 
-
         /// <inheritdoc />
-        public IObservable<IEnumerable<SuperHeroRecord>> Find(string name) => Observable.Create<IEnumerable<SuperHeroRecord>>(observer => _superheroApiContract.Search(name).Select(x => x.Heroes).Subscribe(observer));
+        public IObservable<IEnumerable<SuperHeroRecord>> Find(string name) =>
+            Observable.Create<IEnumerable<SuperHeroRecord>>(observer => _superheroApiContract.Search(name).Select(x => x.Heroes).Subscribe(observer));
 
         private readonly ISuperheroApiContract _superheroApiContract;
     }

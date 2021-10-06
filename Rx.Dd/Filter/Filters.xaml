@@ -9,8 +9,8 @@
                               x:TypeArguments="filter:FiltersViewModel">
     <ContentPage.Content>
         <StackLayout>
-            <Picker x:Name="Alignment" />
-            <ListView x:Name="HeroList">
+            <Picker x:Name="Alignment" HorizontalTextAlignment="Center" />
+            <ListView x:Name="HeroList" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <dd:HeroCard/>

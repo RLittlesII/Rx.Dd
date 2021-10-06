@@ -13,7 +13,7 @@
             <SearchBar x:Name="SearchText" />
             <ListView ItemsSource="{Binding Heroes}" HasUnevenRows="True">
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="data:SuperHeroRecord">
+                    <DataTemplate>
                         <dd:HeroCard/>
                     </DataTemplate>
                 </ListView.ItemTemplate>

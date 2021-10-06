@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -40,7 +41,7 @@ namespace Rx.Dd.Data
         public List<string> Teams { get; set; }
 
         [JsonPropertyName("avatarUrl")]
-        public string AvatarUrl { get; set; }
+        public Uri AvatarUrl { get; set; }
 
         [JsonPropertyName("created")]
         public string Created { get; set; }

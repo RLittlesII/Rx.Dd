@@ -1,16 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using ReactiveUI;
+using System.Reactive.Disposables;
 
 namespace Rx.Dd
 {
     public partial class HeroCard
     {
-        public HeroCard() => InitializeComponent();
+        public HeroCard()
+        {
+            InitializeComponent();
+
+            this.WhenActivated(
+                disposables =>
+                {
+                    this.OneWayBind(ViewModel, x => x.AvatarUrl, x => x.Avatar.Source, x => x.ToString()).DisposeWith(disposables);
+                    this.OneWayBind(ViewModel, x => x.Name, x => x.Name.Text, x => x.ToString()).DisposeWith(disposables);
+                });
+        }
     }
 }
