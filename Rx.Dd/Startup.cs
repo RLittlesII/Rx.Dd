@@ -1,13 +1,13 @@
 using System;
 using ReactiveUI;
 using Refit;
+using Rx.Dd.Changes;
 using Rx.Dd.Data;
 using Rx.Dd.Filter;
 using Rx.Dd.Sort;
 using Sextant;
 using Sextant.XamForms;
 using Splat;
-using System.Net.Http;
 using Xamarin.Forms;
 
 namespace Rx.Dd
@@ -35,13 +35,14 @@ namespace Rx.Dd
            .RegisterView<Filters, FiltersViewModel>()
            .RegisterView<Search, SearchViewModel>()
            .RegisterView<Sorting, SortingViewModel>()
-           .RegisterView<Search, SearchViewModel>();
+           .RegisterView<PropertyChanges, PropertyChangesViewModel>();
 
         private static void RegisterViewModels(IDependencyResolver dependencyResolver) => dependencyResolver
            .RegisterViewModel(new MainViewModel(dependencyResolver.GetService<IParameterViewStackService>()))
            .RegisterViewModel(new FiltersViewModel(dependencyResolver.GetService<IHeroCache>()))
            .RegisterViewModel(new SearchViewModel(dependencyResolver.GetService<IHeroApiClient>()))
-           .RegisterViewModel(new SortingViewModel(dependencyResolver.GetService<IHeroCache>()));
+           .RegisterViewModel(new SortingViewModel(dependencyResolver.GetService<IHeroCache>()))
+           .RegisterViewModel(new PropertyChangesViewModel(dependencyResolver.GetService<IHeroCache>()));
 
         private static void RegisterServices(IDependencyResolver dependencyResolver)
         {

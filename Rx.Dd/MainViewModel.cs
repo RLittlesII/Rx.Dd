@@ -1,5 +1,6 @@
 using ReactiveUI;
 using Rocket.Surgery.Airframe.ViewModels;
+using Rx.Dd.Changes;
 using Rx.Dd.Filter;
 using Rx.Dd.Sort;
 using Sextant;
@@ -8,7 +9,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Windows.Input;
 
 namespace Rx.Dd
 {
@@ -23,6 +23,7 @@ namespace Rx.Dd
                 {
                     return item switch
                     {
+                        MenuItem.Changes => await parameterViewStackService.PushPage<PropertyChangesViewModel>(),
                         MenuItem.Filter  => await parameterViewStackService.PushPage<FiltersViewModel>(),
                         MenuItem.Search  => await parameterViewStackService.PushPage<SearchViewModel>(),
                         MenuItem.Sort    => await parameterViewStackService.PushPage<SortingViewModel>(),
@@ -42,5 +43,6 @@ namespace Rx.Dd
         Filter,
         Search,
         Sort,
+        Changes
     }
 }
