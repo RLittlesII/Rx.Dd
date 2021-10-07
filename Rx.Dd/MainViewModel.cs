@@ -1,6 +1,7 @@
 using ReactiveUI;
 using Rocket.Surgery.Airframe.ViewModels;
 using Rx.Dd.Filter;
+using Rx.Dd.Sort;
 using Sextant;
 using System;
 using System.Collections.ObjectModel;
@@ -22,9 +23,10 @@ namespace Rx.Dd
                 {
                     return item switch
                     {
-                        MenuItem.Filter => await parameterViewStackService.PushPage<FiltersViewModel>(),
-                        MenuItem.Search => await parameterViewStackService.PushPage<SearchViewModel>(),
-                        _               => throw new ArgumentOutOfRangeException(nameof(item), item, null)
+                        MenuItem.Filter  => await parameterViewStackService.PushPage<FiltersViewModel>(),
+                        MenuItem.Search  => await parameterViewStackService.PushPage<SearchViewModel>(),
+                        MenuItem.Sort    => await parameterViewStackService.PushPage<SortingViewModel>(),
+                        _                => throw new ArgumentOutOfRangeException(nameof(item), item, null)
                     };
                 }
             );
@@ -38,6 +40,7 @@ namespace Rx.Dd
     public enum MenuItem
     {
         Filter,
-        Search
+        Search,
+        Sort,
     }
 }

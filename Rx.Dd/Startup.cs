@@ -1,7 +1,9 @@
 using System;
 using ReactiveUI;
 using Refit;
+using Rx.Dd.Data;
 using Rx.Dd.Filter;
+using Rx.Dd.Sort;
 using Sextant;
 using Sextant.XamForms;
 using Splat;
@@ -26,22 +28,22 @@ namespace Rx.Dd
             Build(dependencyResolver);
         }
 
-        private void Build(IDependencyResolver dependencyResolver) =>
+        private static void Build(IDependencyResolver dependencyResolver) =>
             Locator.SetLocator(dependencyResolver);
 
-        private void RegisterViews(IDependencyResolver dependencyResolver)
-        {
-            dependencyResolver.RegisterView<MainPage, MainViewModel>();
-            dependencyResolver.RegisterView<Filters, FiltersViewModel>();
-            dependencyResolver.RegisterView<Search, SearchViewModel>();
-        }
+        private static void RegisterViews(IDependencyResolver dependencyResolver) => dependencyResolver.RegisterView<MainPage, MainViewModel>()
+           .RegisterView<Filters, FiltersViewModel>()
+           .RegisterView<Search, SearchViewModel>()
+           .RegisterView<Sorting, SortingViewModel>()
+           .RegisterView<Search, SearchViewModel>();
 
-        private void RegisterViewModels(IDependencyResolver dependencyResolver) => dependencyResolver
+        private static void RegisterViewModels(IDependencyResolver dependencyResolver) => dependencyResolver
            .RegisterViewModel(new MainViewModel(dependencyResolver.GetService<IParameterViewStackService>()))
            .RegisterViewModel(new FiltersViewModel(dependencyResolver.GetService<IHeroCache>()))
-           .RegisterViewModel(new SearchViewModel(dependencyResolver.GetService<IHeroApiClient>()));
+           .RegisterViewModel(new SearchViewModel(dependencyResolver.GetService<IHeroApiClient>()))
+           .RegisterViewModel(new SortingViewModel(dependencyResolver.GetService<IHeroCache>()));
 
-        private void RegisterServices(IDependencyResolver dependencyResolver)
+        private static void RegisterServices(IDependencyResolver dependencyResolver)
         {
             var navigationView = new NavigationView();
             dependencyResolver.RegisterNavigationView(() => navigationView);
@@ -50,7 +52,7 @@ namespace Rx.Dd
 
             dependencyResolver.Register<ISuperheroApiContract>(() => RestService.For<ISuperheroApiContract>("https://www.superheroapi.com/api/{accesstoken}/", new RefitSettings()));
             dependencyResolver.Register<IHeroApiClient>(() => new HeroApiClient(dependencyResolver.GetService<ISuperheroApiContract>()));
-            dependencyResolver.Register<IHeroCache>(() => new HeroCache(dependencyResolver.GetService<IHeroApiClient>()));
+            dependencyResolver.RegisterLazySingleton<IHeroCache>(() => new HeroCache(dependencyResolver.GetService<IHeroApiClient>()));
             dependencyResolver.InitializeReactiveUI();
         }
 

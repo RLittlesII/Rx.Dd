@@ -1,10 +1,13 @@
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+using Rx.Dd.Data;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Rx.Dd.Data
+namespace Rx.Dd
 {
-    public class Hero
+    public class Hero : ReactiveObject
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }
@@ -23,7 +26,7 @@ namespace Rx.Dd.Data
         public string Name { get; set; }
 
         [JsonPropertyName("realName")]
-        public string RealName { get; set; }
+        [Reactive] public string RealName { get; set; }
 
         [JsonPropertyName("alignment")]
         public string Alignment { get; set; }

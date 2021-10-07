@@ -2,11 +2,11 @@
 
 <xamForms:ReactiveViewCell xmlns="http://xamarin.com/schemas/2014/forms"
                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                           xmlns:data="clr-namespace:Rx.Dd.Data;assembly=Rx.Dd.Data"
                            xmlns:xamForms="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
+                           xmlns:dd="clr-namespace:Rx.Dd;assembly=Rx.Dd"
                            x:Class="Rx.Dd.HeroCard"
-                           x:DataType="data:Hero"
-                           x:TypeArguments="data:Hero" >
+                           x:DataType="dd:Hero"
+                           x:TypeArguments="dd:Hero" >
     <Grid RowDefinitions="*, *, *"
           ColumnDefinitions="*, *"
           Margin="4"

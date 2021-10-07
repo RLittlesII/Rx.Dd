@@ -1,8 +1,7 @@
-using Rx.Dd.Data;
 using System;
 using System.Collections.Generic;
 
-namespace Rx.Dd
+namespace Rx.Dd.Data
 {
     /// <summary>
     /// Interface representing an api client for <see cref="Hero"/>.

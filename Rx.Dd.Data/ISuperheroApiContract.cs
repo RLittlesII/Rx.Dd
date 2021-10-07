@@ -1,8 +1,7 @@
 using Refit;
-using Rx.Dd.Data;
 using System;
 
-namespace Rx.Dd
+namespace Rx.Dd.Data
 {
     public interface ISuperheroApiContract
     {
