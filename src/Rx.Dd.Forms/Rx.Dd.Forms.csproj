@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <LangVersion>9</LangVersion>
+  </PropertyGroup>
+    <ItemGroup>
+    <PackageReference Include="Pharmacist.MsBuild" Version="1.*" PrivateAssets="all" />
+    <PackageReference Include="Pharmacist.Common" Version="1.*" />
+    <PackageReference Include="ReactiveUI.Fody" Version="13.2.*" />
+    <PackageReference Include="ReactiveUI.XamForms" Version="13.2.*" />
+    <PackageReference Include="Refit" Version="6.0.94" />
+    <PackageReference Include="Rocket.Surgery.Airframe.ViewModels" Version="0.8.1" />
+    <PackageReference Include="Sextant.XamForms" Version="2.11.*" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rx.Dd.Data\Rx.Dd.Data.csproj" />
+    <ProjectReference Include="..\Rx.Dd.ViewModel\Rx.Dd.ViewModel.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xamForms:ReactiveContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                              xmlns:xamForms="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
+                              xmlns:filter="clr-namespace:Rx.Dd.ViewModel.Filter;assembly=Rx.Dd.ViewModel"
+                              xmlns:forms="clr-namespace:Rx.Dd.Forms;assembly=Rx.Dd.Forms"
+                              x:Class="Rx.Dd.Forms.Filter.Search"
+                              x:TypeArguments="filter:SearchViewModel">
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar x:Name="SearchText" />
+            <ListView ItemsSource="{Binding Heroes}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <forms:HeroCard/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</xamForms:ReactiveContentPage>
