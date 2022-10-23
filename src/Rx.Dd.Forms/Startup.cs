@@ -55,7 +55,7 @@ namespace Rx.Dd.Forms
             dependencyResolver.RegisterLazySingleton<IParameterViewStackService>(() => new ParameterViewStackService(navigationView));
             dependencyResolver.RegisterLazySingleton<IViewModelFactory>(() => new DefaultViewModelFactory());
 
-            dependencyResolver.Register<ISuperheroApiContract>(() => RestService.For<ISuperheroApiContract>("https://www.superheroapi.com/api/{accesstoken}/", new RefitSettings()));
+            dependencyResolver.Register<ISuperheroApiContract>(() => new SuperHeroApiMock());
             dependencyResolver.Register<IHeroApiClient>(() => new HeroApiClient(dependencyResolver.GetService<ISuperheroApiContract>()));
             dependencyResolver.RegisterLazySingleton<IHeroCache>(() => new HeroCache(dependencyResolver.GetService<IHeroApiClient>()));
             dependencyResolver.InitializeReactiveUI();

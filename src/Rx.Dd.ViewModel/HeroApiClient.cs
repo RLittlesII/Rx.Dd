@@ -1,7 +1,6 @@
 using Rx.Dd.Data;
 using System;
 using System.Collections.Generic;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
 
 namespace Rx.Dd.ViewModel
@@ -19,16 +18,12 @@ namespace Rx.Dd.ViewModel
         public IObservable<IEnumerable<SuperHeroRecord>> GetHeroes(bool forceUpdate = false) =>
             Observable.Create<IEnumerable<SuperHeroRecord>>(observer =>
             {
-                var disposable = new CompositeDisposable();
                 var heroes = new List<SuperHeroRecord>();
 
-                Observable.Range(0, 100)
+                return Observable.Range(0, 99)
                    .Select(id => _superheroApiContract.Get(id.ToString()))
                    .Merge(6)
-                   .Subscribe(hero => heroes.Add(hero), () => observer.OnNext(heroes))
-                   .DisposeWith(disposable);
-
-                return disposable;
+                   .Subscribe(hero => heroes.Add(hero), () => observer.OnNext(heroes));
             }
         );
 
