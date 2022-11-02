@@ -25,11 +25,17 @@ namespace Rx.Dd.ViewModel.Filter
                .DistinctValues(x => x)
                .ObserveOn(RxApp.MainThreadScheduler)
                .Bind(out _alignments)
-               .DisposeMany()
                .Subscribe(_ => { }, RxApp.DefaultExceptionHandler.OnNext)
                .DisposeWith(Garbage);
 
-            static Func<Hero, bool> SelectAlignment(string alignment) => hero =>
+            heroCache
+               .Filter(this.WhenAnyValue(x => x.SelectedAlignment).Select(alignment => selectAlignment(alignment)))
+               .ObserveOn(RxApp.MainThreadScheduler)
+               .Bind(out _heroes)
+               .Subscribe(_ => { }, RxApp.DefaultExceptionHandler.OnNext)
+               .DisposeWith(Garbage);
+
+            static Func<Hero, bool> selectAlignment(string alignment) => hero =>
             {
                 if (!string.IsNullOrEmpty(alignment))
                 {
@@ -38,14 +44,6 @@ namespace Rx.Dd.ViewModel.Filter
 
                 return true;
             };
-
-            heroCache
-               .Filter(this.WhenAnyValue(x => x.SelectedAlignment).Select(SelectAlignment))
-               .ObserveOn(RxApp.MainThreadScheduler)
-               .Bind(out _heroes)
-               .DisposeMany()
-               .Subscribe(_ => { }, RxApp.DefaultExceptionHandler.OnNext)
-               .DisposeWith(Garbage);
         }
 
         public ReadOnlyObservableCollection<string> Alignments => _alignments;

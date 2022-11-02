@@ -13,6 +13,7 @@
           RowSpacing="8"
           ColumnSpacing="8"
           HeightRequest="80">
+        <!-- Comment and watch iOS crash and burn! -->
         <Image x:Name="Avatar" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
         <Label x:Name="Name" Grid.Row="1" Grid.Column="1" />
     </Grid>

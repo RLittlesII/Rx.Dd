@@ -1,5 +1,4 @@
 using ReactiveUI;
-using Refit;
 using Rx.Dd.Data;
 using Rx.Dd.Forms.Changes;
 using Rx.Dd.Forms.Filter;
